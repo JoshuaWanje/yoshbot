@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\yoshbot\debug_run.py", line 7, in <module>
+    movers.main()
+    ^^^^^^^^^^^
+AttributeError: module 'movers' has no attribute 'main'

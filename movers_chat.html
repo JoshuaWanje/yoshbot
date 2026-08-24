@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nairobi &amp; Kiambu Movers — Get a Quote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#1e40af;
+    --blue:#2563eb;
+    --blue-light:#eff6ff;
+    --blue-mid:#bfdbfe;
+    --white:#ffffff;
+    --ink:#0f172a;
+    --muted:#64748b;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(37,99,235,0.08), transparent 45%),
+      radial-gradient(circle at 85% 100%, rgba(37,99,235,0.06), transparent 45%),
+      #f8fafc;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:32px 16px 64px;
+  }
+
+  .app{
+    width:100%;
+    max-width:560px;
+  }
+
+  /* ---------- Route board header ---------- */
+  .board{
+    background:var(--blue-deep);
+    border:3px solid var(--blue);
+    border-radius:18px;
+    padding:18px 20px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 10px 0 rgba(30,64,175,0.25);
+  }
+  .board::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, var(--blue), var(--white), var(--blue));
+    background-size:300% 100%;
+    opacity:0.08;
+    animation:slide 6s linear infinite;
+  }
+  @keyframes slide{ to{ background-position:300% 0; } }
+  .board-eyebrow{
+    font-family:'Baloo 2',sans-serif;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--blue-mid);
+    position:relative;
+  }
+  .board-title{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:clamp(26px,6vw,34px);
+    color:var(--white);
+    margin:2px 0 6px;
+    position:relative;
+    text-shadow:2px 2px 0 rgba(0,0,0,0.15);
+  }
+  .board-route{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--blue-deep);
+  }
+  .stop{
+    background:var(--white);
+    padding:4px 12px;
+    border-radius:999px;
+  }
+  .stop.alt{ background:var(--blue-mid); color:var(--blue-deep); }
+  .arrow{ color:var(--white); font-weight:800; }
+
+  /* ---------- Chat panel ---------- */
+  .panel{
+    background:var(--white);
+    color:var(--ink);
+    border-radius:0 0 18px 18px;
+    margin-top:-8px;
+    padding:18px 16px 16px;
+    border:3px solid var(--blue);
+    border-top:none;
+    box-shadow:0 10px 0 rgba(37,99,235,0.1);
+  }
+
+  .setup{
+    background:var(--blue-light);
+    border:2px dashed var(--blue);
+    border-radius:12px;
+    padding:12px 14px;
+    margin-bottom:14px;
+    font-size:13px;
+    line-height:1.5;
+  }
+  .setup input{
+    width:100%;
+    margin-top:8px;
+    padding:9px 10px;
+    border-radius:8px;
+    border:2px solid var(--blue-mid);
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+  }
+  .setup button{
+    margin-top:8px;
+  }
+
+  .messages{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    max-height:52vh;
+    overflow-y:auto;
+    padding:6px 2px 10px;
+  }
+  .msg{
+    max-width:82%;
+    padding:10px 14px;
+    border-radius:16px;
+    font-size:14.5px;
+    line-height:1.45;
+    white-space:pre-wrap;
+  }
+  .msg.bot{
+    align-self:flex-start;
+    background:var(--blue-light);
+    color:var(--ink);
+    border:1px solid var(--blue-mid);
+    border-bottom-left-radius:4px;
+  }
+  .msg.user{
+    align-self:flex-end;
+    background:var(--blue);
+    color:#fff;
+    border-bottom-right-radius:4px;
+  }
+  .msg.system{
+    align-self:center;
+    background:transparent;
+    color:var(--muted);
+    font-size:12px;
+    font-style:italic;
+  }
+
+  .typing{
+    align-self:flex-start;
+    display:flex;
+    gap:4px;
+    padding:10px 14px;
+    background:var(--blue-light);
+    border:1px solid var(--blue-mid);
+    border-radius:16px;
+    border-bottom-left-radius:4px;
+  }
+  .typing span{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--blue);
+    animation:bounce 1.1s infinite ease-in-out;
+  }
+  .typing span:nth-child(2){animation-delay:0.15s;}
+  .typing span:nth-child(3){animation-delay:0.3s;}
+  @keyframes bounce{ 0%,80%,100%{transform:translateY(0);opacity:0.5;} 40%{transform:translateY(-4px);opacity:1;} }
+
+  .input-row{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+  }
+  .input-row input{
+    flex:1;
+    padding:12px 14px;
+    border-radius:999px;
+    border:2px solid var(--blue-deep);
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+  }
+  .input-row input:focus{ outline:3px solid var(--blue); outline-offset:1px; }
+
+  button{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    border:none;
+    border-radius:999px;
+    padding:11px 20px;
+    cursor:pointer;
+    color:#fff;
+    background:var(--blue);
+    box-shadow:0 4px 0 var(--blue-deep);
+    transition:transform 0.08s ease;
+  }
+  button:hover{ filter:brightness(1.08); }
+  button:active{ transform:translateY(3px); box-shadow:0 1px 0 var(--blue-deep); }
+  button:disabled{ opacity:0.5; cursor:not-allowed; box-shadow:none; }
+  button.secondary{
+    background:var(--white);
+    color:var(--blue-deep);
+    border:2px solid var(--blue);
+    box-shadow:0 4px 0 var(--blue-mid);
+  }
+
+  /* ---------- Quote ticket ---------- */
+  .ticket{
+    margin:14px 2px;
+    background:var(--blue-light);
+    color:var(--ink);
+    border-radius:14px;
+    padding:16px 18px;
+    position:relative;
+    border:2px dashed var(--blue);
+  }
+  .ticket h3{
+    font-family:'Baloo 2',sans-serif;
+    margin:0 0 10px;
+    color:var(--blue-deep);
+    font-size:16px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .ticket-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13.5px;
+    padding:4px 0;
+    border-bottom:1px solid var(--blue-mid);
+  }
+  .ticket-row.total{
+    font-family:'Baloo 2',sans-serif;
+    font-size:17px;
+    color:var(--blue);
+    border-bottom:none;
+    padding-top:8px;
+  }
+
+  /* ---------- Contact form ---------- */
+  .contact-card{
+    margin:14px 2px 4px;
+    background:#fff;
+    border-radius:14px;
+    padding:16px 18px 18px;
+    border:2px solid var(--blue);
+  }
+  .contact-card h3{
+    font-family:'Baloo 2',sans-serif;
+    margin:0 0 4px;
+    color:var(--blue-deep);
+    font-size:17px;
+  }
+  .contact-card p{
+    margin:0 0 12px;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .field{ margin-bottom:10px; }
+  .field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:4px;
+    color:var(--ink);
+  }
+  .field input{
+    width:100%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:2px solid var(--blue-mid);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+  }
+  .field input:focus{ outline:3px solid var(--blue); outline-offset:1px; border-color:transparent; }
+  .field.error input{ border-color:#dc2626; }
+  .field .err-text{ color:#dc2626; font-size:11.5px; margin-top:3px; display:none; }
+  .field.error .err-text{ display:block; }
+
+  .confirm{
+    margin:14px 2px 4px;
+    background:var(--blue-light);
+    border:2px solid var(--blue);
+    border-radius:14px;
+    padding:16px 18px;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .confirm strong{ color:var(--blue-deep); }
+
+  footer{
+    text-align:center;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="board">
+    <div class="board-eyebrow">Get moving today</div>
+    <div class="board-title">Nairobi &amp; Kiambu Movers</div>
+    <div class="board-route">
+      <span class="stop">NAIROBI</span>
+      <span class="arrow">⇄</span>
+      <span class="stop alt">KIAMBU</span>
+    </div>
+  </div>
+
+  <div class="panel">
+
+
+    <div class="messages" id="messages"></div>
+
+    <div class="input-row" id="inputRow">
+      <input type="text" id="userInput" placeholder="Type your reply..." autocomplete="off">
+      <button id="sendBtn">Send</button>
+    </div>
+
+    <footer>Serving Nairobi &amp; Kiambu counties only 🚐</footer>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   STATE — the OpenRouter key, system prompt, and pricing all now
+   live server-side in movers.py. This page only talks to /api/*.
+   ============================================================ */
+let history = [];
+
+const messagesEl = document.getElementById("messages");
+const inputRow = document.getElementById("inputRow");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+
+/* ============================================================
+   UI HELPERS
+   ============================================================ */
+function addMessage(role, text){
+  const div = document.createElement("div");
+  div.className = "msg " + role;
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+function addSystemNote(text){
+  addMessage("system", text);
+}
+
+function showTyping(){
+  const div = document.createElement("div");
+  div.className = "typing";
+  div.id = "typingIndicator";
+  div.innerHTML = "<span></span><span></span><span></span>";
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+function hideTyping(){
+  const el = document.getElementById("typingIndicator");
+  if (el) el.remove();
+}
+
+function setBusy(busy){
+  sendBtn.disabled = busy;
+  userInput.disabled = busy;
+}
+
+/* ============================================================
+   START
+   ============================================================ */
+startChat();
+
+function startChat(){
+  const greeting = "Hi! I can help you get a moving quote in Nairobi or Kiambu. Where are you moving from?";
+  history.push({ role: "assistant", content: greeting });
+  addMessage("bot", greeting);
+  userInput.focus();
+}
+
+/* ============================================================
+   SENDING MESSAGES
+   ============================================================ */
+sendBtn.addEventListener("click", sendMessage);
+userInput.addEventListener("keydown", (e) => { if (e.key === "Enter") sendMessage(); });
+
+async function sendMessage(){
+  const text = userInput.value.trim();
+  if (!text) return;
+  userInput.value = "";
+  addMessage("user", text);
+  history.push({ role: "user", content: text });
+
+  setBusy(true);
+  showTyping();
+
+  let reply;
+  try{
+    reply = await askAI(history);
+  } catch(err){
+    hideTyping();
+    addSystemNote("Connection or API problem: " + err.message + ". Please try again.");
+    setBusy(false);
+    return;
+  }
+  hideTyping();
+  setBusy(false);
+
+  history.push({ role: "assistant", content: reply });
+
+  if (reply.includes("DATA_READY:")){
+    const [visible, jsonPart] = splitOnce(reply, "DATA_READY:");
+    if (visible.trim()) addMessage("bot", visible.trim());
+
+    let data;
+    try{
+      data = JSON.parse(jsonPart.trim());
+    } catch(e){
+      addSystemNote("Sorry, something went wrong reading the details — let me try that again.");
+      history.push({ role: "user", content: "That JSON didn't come through correctly. Please resend the DATA_READY line with valid JSON." });
+      return;
+    }
+
+    await handleQuote(data);
+    return;
+  }
+
+  addMessage("bot", reply);
+}
+
+function splitOnce(str, sep){
+  const idx = str.indexOf(sep);
+  return [str.slice(0, idx), str.slice(idx + sep.length)];
+}
+
+/* ============================================================
+   AI CALL — proxied through movers.py's /api/chat
+   ============================================================ */
+async function askAI(hist){
+  const resp = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ history: hist })
+  });
+  const data = await resp.json();
+  if (!resp.ok) throw new Error(data.error || ("Request failed (" + resp.status + ")"));
+  return data.reply.trim();
+}
+
+/* ============================================================
+   QUOTE — geocoding, distance, and pricing all happen server-side
+   in movers.py; this just calls /api/quote with the collected fields.
+   ============================================================ */
+let lastQuote = null; // kept so the contact form can reference it
+
+async function handleQuote(data){
+  showTyping();
+  try{
+    const resp = await fetch("/api/quote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    const q = await resp.json();
+    if (!resp.ok) throw new Error(q.error || ("Request failed (" + resp.status + ")"));
+
+    lastQuote = {
+      pickup_location: q.pickup_location,
+      destination: q.destination,
+      house_type: q.house_type,
+      seats_owned: q.seats_owned,
+      km: q.km,
+      base: q.base,
+      distCharge: q.dist_charge,
+      seatCharge: q.seat_charge,
+      total: q.total
+    };
+
+    hideTyping();
+    renderTicket(lastQuote);
+    renderContactForm();
+  } catch(err){
+    hideTyping();
+    addSystemNote("Could not calculate your quote: " + err.message);
+  }
+}
+
+function fmtKES(n){ return "KES " + n.toLocaleString(); }
+
+function renderTicket(q){
+  const div = document.createElement("div");
+  div.className = "ticket";
+  div.innerHTML = `
+    <h3>Your Moving Quote</h3>
+    <div class="ticket-row"><span>Route</span><span>${escapeHtml(q.pickup_location)} → ${escapeHtml(q.destination)}</span></div>
+    <div class="ticket-row"><span>House type</span><span>${escapeHtml(q.house_type)}</span></div>
+    <div class="ticket-row"><span>Seats owned</span><span>${q.seats_owned}</span></div>
+    <div class="ticket-row"><span>Distance</span><span>${q.km.toFixed(1)} km</span></div>
+    <div class="ticket-row"><span>Base fee</span><span>${fmtKES(q.base)}</span></div>
+    <div class="ticket-row"><span>Distance charge</span><span>${fmtKES(q.distCharge)}</span></div>
+    <div class="ticket-row"><span>Seats charge</span><span>${fmtKES(q.seatCharge)}</span></div>
+    <div class="ticket-row total"><span>TOTAL</span><span>${fmtKES(q.total)}</span></div>
+  `;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function escapeHtml(str){
+  const d = document.createElement("div");
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+/* ============================================================
+   CONTACT FORM — collected after the quote is shown
+   ============================================================ */
+function renderContactForm(){
+  inputRow.style.display = "none";
+
+  const card = document.createElement("div");
+  card.className = "contact-card";
+  card.innerHTML = `
+    <h3>Almost there 🎉</h3>
+    <p>Share your details and our team will confirm your booking and moving date.</p>
+    <div class="field" id="f-name">
+      <label for="c-name">Full name</label>
+      <input type="text" id="c-name" placeholder="e.g. Wanjiru Kamau" autocomplete="name">
+      <div class="err-text">Please enter your name.</div>
+    </div>
+    <div class="field" id="f-phone">
+      <label for="c-phone">Phone number</label>
+      <input type="tel" id="c-phone" placeholder="e.g. 0712 345 678" autocomplete="tel">
+      <div class="err-text">Please enter a valid Kenyan phone number.</div>
+    </div>
+    <div class="field" id="f-email">
+      <label for="c-email">Email address</label>
+      <input type="email" id="c-email" placeholder="e.g. wanjiru@example.com" autocomplete="email">
+      <div class="err-text">Please enter a valid email address.</div>
+    </div>
+    <button id="submitContactBtn">Confirm booking</button>
+  `;
+  messagesEl.appendChild(card);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  document.getElementById("submitContactBtn").addEventListener("click", () => {
+    submitContact(card);
+  });
+}
+
+async function submitContact(card){
+  const nameEl = document.getElementById("c-name");
+  const phoneEl = document.getElementById("c-phone");
+  const emailEl = document.getElementById("c-email");
+
+  const name = nameEl.value.trim();
+  const phone = phoneEl.value.trim();
+  const email = emailEl.value.trim();
+
+  const phoneOk = /^(?:\+254|0)7\d{8}$|^(?:\+254|0)1\d{8}$/.test(phone.replace(/\s+/g, ""));
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  toggleError("f-name", !name);
+  toggleError("f-phone", !phoneOk);
+  toggleError("f-email", !emailOk);
+
+  if (!name || !phoneOk || !emailOk) return;
+
+  const lead = { name, phone, email, quote: lastQuote, submittedAt: new Date().toISOString() };
+
+  document.getElementById("submitContactBtn").disabled = true;
+  try{
+    const resp = await fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(lead)
+    });
+    const result = await resp.json();
+    if (!resp.ok) throw new Error(result.error || "Could not save your details.");
+  } catch(err){
+    document.getElementById("submitContactBtn").disabled = false;
+    addSystemNote("Could not save your details: " + err.message + ". Please try confirming again.");
+    return;
+  }
+
+  card.remove();
+  const confirm = document.createElement("div");
+  confirm.className = "confirm";
+  confirm.innerHTML = `Thanks, <strong>${escapeHtml(name)}</strong>! We've got your details and your quote of
+    <strong>${fmtKES(lastQuote.total)}</strong>. Our team will call you on <strong>${escapeHtml(phone)}</strong>
+    or email <strong>${escapeHtml(email)}</strong> shortly to confirm your moving date.`;
+  messagesEl.appendChild(confirm);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function toggleError(fieldId, hasError){
+  document.getElementById(fieldId).classList.toggle("error", hasError);
+}
+</script>
+</body>
+</html>

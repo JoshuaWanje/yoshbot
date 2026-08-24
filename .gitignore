@@ -1,0 +1,10 @@
+# Never commit
+.env
+venv/
+_pycache_
+.pyc
+movers_quote.txt
+movers_leads.json1
+Thumbs.db
+.DS_Store
+.vscode/

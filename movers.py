@@ -283,8 +283,8 @@ def build_quote_email_html(lead):
         row("Distance", f'{q["km"]} km'),
         row("House", q["house_type"]),
         row("Base fee", f'KES {q["base"]:,}'),
-        row("Distance charge", f'KES {q["dist_charge"]:,}'),
-        row("Seats charge", f'KES {q["seat_charge"]:,}'),
+        row("Distance charge", f'KES {dist_charge:,}'),
+        row("Seats charge", f'KES {seat_charge:,}'),
     ])
 
     return f"""<!DOCTYPE html>

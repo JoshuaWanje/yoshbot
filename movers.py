@@ -276,7 +276,7 @@ def build_quote_email_html(lead):
           <td style="padding:6px 0;color:#334155;font-size:14px;{weight}">{label}</td>
           <td style="padding:6px 0;color:#0f172a;font-size:14px;text-align:right;{weight}">{value}</td>
         </tr>"""
-
+    
     rows = "".join([
         row("Distance", f'{q["km"]} km'),
         row("House", q["house_type"]),
